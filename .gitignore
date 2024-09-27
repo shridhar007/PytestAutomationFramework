@@ -1,0 +1,17 @@
+# Ignore .idea folder (IDE settings)
+.idea/
+
+# Ignore pytest cache
+.pytest_cache/
+
+# Ignore virtual environment folder
+.venv/
+
+#Ignore .git folder 
+.git/
+
+# Ignore compiled Python files
+*.pyc
+
+# Ignore log files
+*.log

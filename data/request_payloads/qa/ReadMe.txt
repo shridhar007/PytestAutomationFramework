@@ -1,0 +1,1 @@
+All QA request payload to be stored in this folder.
