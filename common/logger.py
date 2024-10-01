@@ -39,5 +39,4 @@ def log_generator(test_case_source: str, root_dir: Path) -> Logger:
     logger.addHandler(file_handler)
     return logger
 
-
 # Enhancement - Add method to automatically delete historical logs which are no longer required.

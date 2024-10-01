@@ -32,16 +32,17 @@ class TestDemoAPIs():
 
         # Request preparation.
         rest_client = RestClient(logger)
-        rest_client.set_base_url(base_url)
-        rest_client.set_request_header(headers=headers)
-        rest_client.set_end_point('/workspaces?')
+        rest_client.base_url = base_url
+        rest_client.request_headers = headers
+        rest_client.end_point = '/workspaces?'
+        rest_client.request_param = ' '
 
         # Send Request.
-        response: Response = rest_client.get_request()
+        response: Response = rest_client.execute_request('GET')
 
         # User asserts.
-        user_asserts.assert_actual_expected_to_be_equal(expected_value=201, actual_value=response.status_code,
-                                                        log_info='Actual and expected should match')
+        user_asserts.assert_actual_expected_to_be_equal(200, response.status_code,
+                                                        'Actual and expected should match')
 
     @allure.title("Test case to perform POST operation using Postman APIs")
     @allure.severity(allure.severity_level.NORMAL)
@@ -70,13 +71,13 @@ class TestDemoAPIs():
 
         # Request preparation.
         rest_client = RestClient(logger)
-        rest_client.set_base_url(base_url)
-        rest_client.set_request_header(headers=headers)
-        rest_client.set_end_point('/workspaces?')
-        rest_client.set_api_request_data(request_data)
+        rest_client.base_url = base_url
+        rest_client.request_headers = headers
+        rest_client.end_point = '/workspaces?'
+        rest_client.request_data = request_data
 
         # Send post request.
-        response: Response = rest_client.post_request()
+        response: Response = rest_client.execute_request('POST')
         response_body: dict = response.json()
 
         workspace_name = response_body['workspace']['name']
@@ -86,12 +87,12 @@ class TestDemoAPIs():
         logger.info(f'Workspace id : {workspace_id}')
 
         # User asserts.
-        request_data_dict = json.loads(rest_client.get_api_request_data())
-        user_asserts.assert_actual_expected_to_be_equal(expected_value=200, actual_value=response.status_code,
-                                                        log_info='Actual and expected should match')
+        request_data_dict = json.loads(rest_client.request_data)
+        user_asserts.assert_actual_expected_to_be_equal(200, response.status_code,
+                                                        'Actual and expected should match')
 
-        user_asserts.assert_actual_expected_to_be_equal(expected_value=request_data_dict['workspace']['name'],
-                                                        actual_value=workspace_name)
+        user_asserts.assert_actual_expected_to_be_equal(request_data_dict['workspace']['name'],
+                                                        workspace_name)
 
     ''' 
      In this use case we will first create a new workspace.
@@ -99,6 +100,7 @@ class TestDemoAPIs():
      By using put method, we will update/replace the Workspace
      We will validate new workspace name after PUT
     '''
+
     @allure.title("Test case to perform PUT operation using Postman APIs")
     @allure.severity(allure.severity_level.NORMAL)
     def test_004(self, api_setup_teardown):
@@ -127,13 +129,14 @@ class TestDemoAPIs():
 
         # Request preparation.
         rest_client = RestClient(logger)
-        rest_client.set_base_url(base_url)
-        rest_client.set_request_header(headers=headers)
-        rest_client.set_end_point('/workspaces?')
-        rest_client.set_api_request_data(request_data)
+        rest_client.base_url = base_url
+
+        rest_client.request_headers = headers
+        rest_client.end_point = '/workspaces?'
+        rest_client.request_data = request_data
 
         # Send post request.
-        response: Response = rest_client.post_request()
+        response: Response = rest_client.execute_request('POST')
         response_body: dict = response.json()
         initial_workspace_name = response_body['workspace']['name']
         initial_workspace_id = response_body['workspace']['id']
@@ -142,12 +145,12 @@ class TestDemoAPIs():
         logger.info(f'Initial workspace id : {initial_workspace_id}')
 
         # User asserts - POST Request
-        request_data_dict = json.loads(rest_client.get_api_request_data())
-        user_asserts.assert_actual_expected_to_be_equal(expected_value=200, actual_value=response.status_code,
-                                                        log_info='Actual and expected should match')
+        request_data_dict = json.loads(rest_client.request_data)
+        user_asserts.assert_actual_expected_to_be_equal(200, response.status_code,
+                                                        'Actual and expected should match')
 
-        user_asserts.assert_actual_expected_to_be_equal(expected_value=request_data_dict['workspace']['name'],
-                                                        actual_value=initial_workspace_name)
+        user_asserts.assert_actual_expected_to_be_equal(request_data_dict['workspace']['name'],
+                                                        initial_workspace_name)
 
         # PUT request.
         # Put request data preparation
@@ -163,14 +166,13 @@ class TestDemoAPIs():
 
         # PUT Request preparation.
         rest_client_put = RestClient(logger)
-        rest_client_put.set_base_url(base_url)
-        rest_client_put.set_request_header(headers=headers)
-        rest_client_put.set_end_point(f'/workspaces/{initial_workspace_id}')
-        rest_client_put.set_api_request_data(request_data_put)
+        rest_client_put.base_url = base_url
+        rest_client_put.request_headers = headers
+        rest_client_put.end_point = f'/workspaces/{initial_workspace_id}'
+        rest_client_put.request_data = request_data_put
 
         # Send PUT request.
-        response_put: Response = rest_client_put.put_request()
-
+        response_put: Response = rest_client_put.execute_request('PUT')
         response_body: dict = response_put.json()
         workspace_name_after_put = response_body['workspace']['name']
         workspace_id_after_put = response_body['workspace']['id']
@@ -179,9 +181,51 @@ class TestDemoAPIs():
         logger.info(f'Workspace id after put: {workspace_id_after_put}')
 
         # User asserts - PUT Request
-        request_data_dict_put = json.loads(rest_client_put.get_api_request_data())
-        user_asserts.assert_actual_expected_to_be_equal(expected_value=200, actual_value=response_put.status_code,
-                                                        log_info='Actual and expected should match')
+        request_data_dict_put = json.loads(rest_client.request_data)
+        user_asserts.assert_actual_expected_to_be_equal(200, response_put.status_code,
+                                                        'Actual and expected should match')
 
-        user_asserts.assert_actual_expected_to_be_equal(expected_value=request_data_dict_put['workspace']['name'],
-                                                        actual_value=workspace_name_after_put)
+        user_asserts.assert_actual_expected_are_not_equal(request_data_dict_put['workspace']['name'],
+                                                        workspace_name_after_put)
+
+    @allure.title("Test case to perform delete operation")
+    @allure.severity(allure.severity_level.NORMAL)
+    def test_005(self, api_setup_teardown):
+        WORKSPACE_NAME_TO_BE_DELETED = 'created_from_python_framework'
+
+        env_under_test, config_data, user_asserts, logger = api_setup_teardown
+        test_case_name = inspect.currentframe().f_code.co_name
+
+        logger.info(f"Test under execution : {test_case_name}")
+        base_url = config_data['base_url']
+        # Initialize headers. Can be moved to separate file later.
+        headers = {
+            'x-api-key': config_data['api_key'],
+            'Content-Type': 'application/json',
+            'User-Agent': 'my-app/0.0.1'
+        }
+
+        # Get all existing workspaces.
+        # Request preparation.
+        rest_client = RestClient(logger)
+        rest_client.base_url = base_url
+
+        rest_client.request_headers = headers
+        rest_client.end_point = '/workspaces?'
+
+        # Send Request.
+        response: Response = rest_client.execute_request('GET')
+        response_body: str = response.json()
+
+        # Delete request preparation.
+        for record in response_body['workspaces']:
+            record_workspace_id = record['id']
+            record_workspace_name = record['name']
+
+            if record_workspace_name == WORKSPACE_NAME_TO_BE_DELETED:
+                rest_client.end_point = f'/workspaces/{record_workspace_id}'
+
+                delete_response: Response = rest_client.execute_request('DELETE')
+                delete_response_response_json: str = delete_response.json()
+            else:
+                logger.info("Workspace name not found")

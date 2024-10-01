@@ -1,6 +1,7 @@
 import platform
 from pathlib import Path
 import pytest
+from playwright.async_api import async_playwright
 
 from common.framework_functions import CommonFunctions
 from common.logger import log_generator
@@ -30,14 +31,14 @@ def api_setup_teardown(request: SubRequest):
     # command: str = f'allure generate --clean --single-file "{allure_dir}"'
     # logger.info(f'Allure single file generation command : {command}')
 
-    #Prepare Environment Variables for Allure Report.
+    # Prepare Environment Variables for Allure Report.
     env_template_filename = 'environment.properties'
-    env_template_file_path = root_dir.joinpath('conf',env_template_filename)
+    env_template_file_path = root_dir.joinpath('conf', env_template_filename)
 
     if env_template_file_path.exists():
         # Read env_template file and update values. Save new file in allure-results dir.
         logger.info("Allure Report: Environment file exists")
-        content:str
+        content: str
         with open(env_template_file_path, 'r') as file:
             content = file.read()
             os_name = platform.system()
@@ -53,7 +54,24 @@ def api_setup_teardown(request: SubRequest):
     else:
         logger.info("Allure Report: Environment file do not exists")
 
-@pytest.fixture(scope='class', autouse=True)
-def setup_playwright_context():
+
+# @pytest.fixture(scope='class', autouse=True)
+# def setup_playwright_context():
+#     logger = log_generator("UI")
+#     pass
+
+@pytest.fixture(scope="session", autouse=True)
+async def playwright_context():
+    # Setup: Initialize Playwright
     logger = log_generator("UI")
-    pass
+    async with async_playwright() as playwright:
+        # Launch the browser (e.g., Chromium, Firefox, or Webkit)
+        browser = await playwright.chromium.launch(headless=False)  # Set headless=True for headless mode
+        # Create a new browser context
+        context = await browser.new_context()
+        # Provide the browser context to the test
+        yield context
+
+        # Teardown: Close the browser
+        await context.close()
+        await browser.close()
