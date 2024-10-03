@@ -9,9 +9,9 @@ from conf.conftest import api_setup_teardown
 
 
 @allure.feature("API Automation")
-@allure.parent_suite("JazzX API Automation")
+@allure.parent_suite("Postman Workspace Automation")
 @allure.suite("Sanity Test Cases")
-@allure.sub_suite("Postman APIs")
+@allure.sub_suite("Postman Workspace APIs")
 class TestDemoAPIs():
 
     @allure.title("Test case to perform GET operation using Postman APIs")
