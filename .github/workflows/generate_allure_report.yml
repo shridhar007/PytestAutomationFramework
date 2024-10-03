@@ -16,7 +16,7 @@ jobs:
     defaults:
       run:
         shell: bash # Set the shell for the job
-        working-directory: ./qa_tests # Set the working directory for the job
+        working-directory: ./PytestAutomationFramework # Set the working directory for the job
 
     steps:
       - name: Checkout repo # Step to check out the repository
@@ -30,7 +30,6 @@ jobs:
       - name: Install dependencies # Step to install project dependencies
         run: |
           python -m pip install --upgrade pip
-          cd ..
           pip install -r requirements.txt
 
       - name: Prepare Allure history # Step to prepare Allure history directory
