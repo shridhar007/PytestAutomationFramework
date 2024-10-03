@@ -2,7 +2,7 @@ import configparser
 from configparser import ConfigParser
 from pathlib import Path
 
-import cryptocode
+from cryptography.fernet import Fernet
 
 
 class CommonFunctions:
@@ -41,6 +41,8 @@ class CommonFunctions:
 
     @staticmethod
     def decrypt_key(encoded_str: str, key: str) -> str:
-        print(encoded_str)
-        print(key)
-        return cryptocode.decrypt(encoded_str, key)
+        encoded_bytes = encoded_str.encode('utf-8')
+        cipher_suite = Fernet(key.encode('utf-8'))
+        decoded_msg = cipher_suite.decrypt(encoded_bytes).decode()
+        return decoded_msg
+

@@ -2,10 +2,12 @@ import inspect
 import json
 
 import allure
+from cryptography.fernet import Fernet
 from requests import Response
 
 from common.rest_client import RestClient
 from conf.conftest import api_setup_teardown
+from common.framework_functions import CommonFunctions
 
 
 @allure.feature("API Automation")
@@ -22,10 +24,11 @@ class TestDemoAPIs():
 
         logger.info(f"Test under execution : {test_case_name}")
         base_url = config_data['base_url']
+        decrypted_text = CommonFunctions.decrypt_key(encoded_str=config_data['api_key'], key=config_data['key'])
 
         # Initialize headers. Can be moved to separate file later.
         headers = {
-            'x-api-key': config_data['api_key'],
+            'x-api-key': decrypted_text,
             'Content-Type': 'application/json',
             'User-Agent': 'my-app/0.0.1'
         }
@@ -52,10 +55,11 @@ class TestDemoAPIs():
 
         logger.info(f"Test under execution : {test_case_name}")
         base_url = config_data['base_url']
+        decrypted_text = CommonFunctions.decrypt_key(encoded_str=config_data['api_key'], key=config_data['key'])
 
         # Initialize headers. Can be moved to separate file later.
         headers = {
-            'x-api-key': config_data['api_key'],
+            'x-api-key': decrypted_text,
             'Content-Type': 'application/json',
             'User-Agent': 'my-app/0.0.1'
         }
@@ -110,10 +114,12 @@ class TestDemoAPIs():
         logger.info(f"Test under execution : {test_case_name}")
         base_url = config_data['base_url']
 
+        decrypted_text = CommonFunctions.decrypt_key(encoded_str=config_data['api_key'], key=config_data['key'])
+
         # create new workspace
         # Initialize headers. Can be moved to separate file later.
         headers = {
-            'x-api-key': config_data['api_key'],
+            'x-api-key': decrypted_text,
             'Content-Type': 'application/json',
             'User-Agent': 'my-app/0.0.1'
         }
@@ -186,7 +192,7 @@ class TestDemoAPIs():
                                                         'Actual and expected should match')
 
         user_asserts.assert_actual_expected_are_not_equal(request_data_dict_put['workspace']['name'],
-                                                        workspace_name_after_put)
+                                                          workspace_name_after_put)
 
     @allure.title("Test case to perform delete operation")
     @allure.severity(allure.severity_level.NORMAL)
@@ -198,9 +204,12 @@ class TestDemoAPIs():
 
         logger.info(f"Test under execution : {test_case_name}")
         base_url = config_data['base_url']
+
+        decrypted_text = CommonFunctions.decrypt_key(encoded_str=config_data['api_key'], key=config_data['key'])
+
         # Initialize headers. Can be moved to separate file later.
         headers = {
-            'x-api-key': config_data['api_key'],
+            'x-api-key': decrypted_text,
             'Content-Type': 'application/json',
             'User-Agent': 'my-app/0.0.1'
         }
