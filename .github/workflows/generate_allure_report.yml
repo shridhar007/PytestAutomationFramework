@@ -34,7 +34,7 @@ jobs:
 
       - name: Prepare Allure history # Step to prepare Allure history directory
         run: |
-          cd ..
+#          cd..
           mkdir -p ${{ vars.ALLURE_RESULTS_PATH }
 
       - name: Run tests with pytest # Step to run tests using pytest
