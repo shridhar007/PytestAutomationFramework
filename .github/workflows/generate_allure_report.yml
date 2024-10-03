@@ -39,7 +39,7 @@ jobs:
 
       - name: Run tests with pytest # Step to run tests using pytest
         run: |
-          python -m pytest -v --tags="${{ github.event.inputs.tags }}" --color=yes --alluredir=../logs/${{ vars.ALLURE_RESULTS_PATH }}
+          python -m pytest -v --alluredir=../logs/${{ vars.ALLURE_RESULTS_PATH }}
 
       - name: Get Allure history # Step to retrieve Allure history
         uses: actions/checkout@v3
