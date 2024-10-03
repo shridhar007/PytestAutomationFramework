@@ -1,0 +1,5 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Thu Oct 03 09:54:27 GMT 2024","Thu Oct 03 09:54:28 GMT 2024","1176","JazzX API Automation","Sanity Test Cases","Postman APIs","","","Test case to perform PUT operation using Postman APIs",""
+"passed","Thu Oct 03 09:54:26 GMT 2024","Thu Oct 03 09:54:26 GMT 2024","649","JazzX API Automation","Sanity Test Cases","Postman APIs","","","Test case to perform GET operation using Postman APIs",""
+"passed","Thu Oct 03 09:54:26 GMT 2024","Thu Oct 03 09:54:27 GMT 2024","566","JazzX API Automation","Sanity Test Cases","Postman APIs","","","Test case to perform POST operation using Postman APIs",""
+"passed","Thu Oct 03 09:54:28 GMT 2024","Thu Oct 03 09:54:29 GMT 2024","956","JazzX API Automation","Sanity Test Cases","Postman APIs","","","Test case to perform delete operation",""
