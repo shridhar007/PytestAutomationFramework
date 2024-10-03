@@ -16,7 +16,7 @@ jobs:
     defaults:
       run:
         shell: bash # Set the shell for the job
-        working-directory: . # Set the working directory for the job
+        working-directory: ./PytestAutomationFramework # Set the working directory for the job
 
     steps:
       - name: Checkout repo # Step to check out the repository
