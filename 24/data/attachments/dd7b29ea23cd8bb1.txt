@@ -1,0 +1,8 @@
+INFO     common.logger:conftest.py:23 Starting test setup process...
+INFO     common.logger:conftest.py:24 API tests are configured for QA environment
+INFO     common.logger:conftest.py:25 BaseURL : https://api.postman.com
+INFO     common.logger:test_demo_api.py:25 Test under execution : test_002
+INFO     common.logger:rest_client.py:95 Initializing GET rest call from https://api.postman.com/workspaces?
+INFO     common.logger:rest_client.py:121 GET request is Successful.....
+INFO     common.logger:user_asserts.py:13 Actual and expected should match
+INFO     common.logger:user_asserts.py:14 Expected value - 200 : Actual value - 200
