@@ -30,12 +30,15 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+
       - name: Prepare Allure history # Step to prepare Allure history directory
         run: |
-          mkdir -p ../logs/${{ vars.ALLURE_RESULTS_PATH }}
+          mkdir -p ${{ vars.ALLURE_RESULTS_PATH }}
+
       - name: Run tests with pytest # Step to run tests using pytest
         run: |
-          python -m pytest -v --alluredir=../logs/${{ vars.ALLURE_RESULTS_PATH }}
+          python -m pytest -v --alluredir ${{ vars.ALLURE_RESULTS_PATH }}
+
       - name: Get Allure history # Step to retrieve Allure history
         uses: actions/checkout@v3
         if: always() # Execute even if previous steps fail
@@ -48,7 +51,7 @@ jobs:
         uses: simple-elf/allure-report-action@master
         if: always() # Execute even if previous steps fail
         with:
-          allure_results: ../logs/${{ vars.ALLURE_RESULTS_PATH }} # Specify the directory containing Allure results
+          allure_results: ${{ vars.ALLURE_RESULTS_PATH }} # Specify the directory containing Allure results
           allure_history: allure-history # Specify the directory to store Allure history
           keep_reports: 5 # Specify the number of previous reports to keep
 
