@@ -6,7 +6,7 @@ on:
     inputs:
       tags: # Input parameter for test scenario tags
         description: "Test scenario tags"
-        required: True
+        required: False
         default: "smoke"
 
 jobs:
@@ -34,11 +34,13 @@ jobs:
 
       - name: Prepare Allure history # Step to prepare Allure history directory
         run: |
-          mkdir -p ../logs/${{ vars.ALLURE_RESULTS_PATH }}
+          cd logs
+          mkdir -p ${{ vars.ALLURE_RESULTS_PATH }}
 
       - name: Run tests with pytest # Step to run tests using pytest
         run: |
-          python -m pytest -v --alluredir=../logs/${{ vars.ALLURE_RESULTS_PATH }}
+          cd ..
+          python -m pytest -v --alluredir ${{ vars.ALLURE_RESULTS_PATH }}
 
       - name: Get Allure history # Step to retrieve Allure history
         uses: actions/checkout@v3
@@ -52,7 +54,7 @@ jobs:
         uses: simple-elf/allure-report-action@master
         if: always() # Execute even if previous steps fail
         with:
-          allure_results: ../logs/${{ vars.ALLURE_RESULTS_PATH }} # Specify the directory containing Allure results
+          allure_results: ${{ vars.ALLURE_RESULTS_PATH }} # Specify the directory containing Allure results
           allure_history: allure-history # Specify the directory to store Allure history
           keep_reports: 5 # Specify the number of previous reports to keep
 
