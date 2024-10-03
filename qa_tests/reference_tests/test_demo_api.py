@@ -191,7 +191,7 @@ class TestDemoAPIs():
     @allure.title("Test case to perform delete operation")
     @allure.severity(allure.severity_level.NORMAL)
     def test_005(self, api_setup_teardown):
-        WORKSPACE_NAME_TO_BE_DELETED = 'new_name'
+        WORKSPACE_NAME_TO_BE_DELETED = 'created_from_python_framework'
 
         env_under_test, config_data, user_asserts, logger = api_setup_teardown
         test_case_name = inspect.currentframe().f_code.co_name

@@ -40,7 +40,7 @@ class RestClient:
         return self._https_session.headers
 
     @request_headers.setter
-    @allure.step("Set request headers as {1}")
+    @allure.step("Set request headers")
     def request_headers(self, value):
         self._https_session = requests.Session()
         self._https_session.headers = value
