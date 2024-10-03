@@ -1,0 +1,6 @@
+1. pytest --alluredir {path_to_allure_results_dir}
+   Eg.D:\Repos\Python\PytestAutomationFramework\logs\allure-results\
+   It holds intermediate results
+
+2. allure generate --single-file --clean
+path/to/allure-results
