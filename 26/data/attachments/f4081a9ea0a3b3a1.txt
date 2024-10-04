@@ -1,0 +1,22 @@
+INFO     common.logger:test_demo_api.py:205 Test under execution : test_005
+INFO     common.logger:rest_client.py:95 Initializing GET rest call from https://api.postman.com/workspaces?
+INFO     common.logger:rest_client.py:121 GET request is Successful.....
+INFO     common.logger:test_demo_api.py:240 Workspace name not found
+INFO     common.logger:test_demo_api.py:240 Workspace name not found
+INFO     common.logger:test_demo_api.py:240 Workspace name not found
+INFO     common.logger:test_demo_api.py:240 Workspace name not found
+INFO     common.logger:test_demo_api.py:240 Workspace name not found
+INFO     common.logger:test_demo_api.py:240 Workspace name not found
+INFO     common.logger:test_demo_api.py:240 Workspace name not found
+INFO     common.logger:test_demo_api.py:240 Workspace name not found
+INFO     common.logger:test_demo_api.py:240 Workspace name not found
+INFO     common.logger:test_demo_api.py:240 Workspace name not found
+INFO     common.logger:test_demo_api.py:240 Workspace name not found
+INFO     common.logger:test_demo_api.py:240 Workspace name not found
+INFO     common.logger:test_demo_api.py:240 Workspace name not found
+INFO     common.logger:test_demo_api.py:240 Workspace name not found
+INFO     common.logger:rest_client.py:95 Initializing DELETE rest call from https://api.postman.com/workspaces/5a089386-b7ba-41ac-a654-c0e07c792935
+INFO     common.logger:rest_client.py:121 DELETE request is Successful.....
+INFO     common.logger:conftest.py:40 Allure Report: Environment file exists
+INFO     common.logger:conftest.py:48 Allure Report: Environment file template read successfully. 
+INFO     common.logger:conftest.py:52 Allure Report: Environment file template saved successfully.
