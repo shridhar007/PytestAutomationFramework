@@ -12,75 +12,75 @@ from requests import Response
 class RestClient:
 
     def __init__(self, logger: Logger):
-        self._https_session = requests.Session()
-        self._https_session.verify = True
+        self.__https_session = requests.Session()
+        self.__https_session.verify = True
         self.logger: Logger = logger
         self.success_status_code = (200, 201, 202, 204)
 
-        self._base_url = None
-        self._https_session.headers = None
-        self._end_point = None
-        self._params = None
-        self._request_data = None
-        self._request_param = None
+        self.__base_url = None
+        self.__https_session.headers = None
+        self.__end_point = None
+        self.__params = None
+        self.__request_data = None
+        self.__request_param = None
 
     @property
     @allure.step("Get Base URL")
     def base_url(self) -> str:
-        return self._base_url
+        return self.__base_url
 
     @base_url.setter
     @allure.step("Set Base URL as {1}")
     def base_url(self, value: str):
-        self._base_url = value
+        self.__base_url = value
 
     @property
     @allure.step("Get request headers")
     def request_headers(self) -> MutableMapping[str, str | bytes]:
-        return self._https_session.headers
+        return self.__https_session.headers
 
     @request_headers.setter
     @allure.step("Set request headers")
-    def request_headers(self, value):
-        self._https_session = requests.Session()
-        self._https_session.headers = value
+    def request_headers(self, value: str):
+        self.__https_session = requests.Session()
+        self.__https_session.headers = value
 
     @property
     @allure.step("Get api end point")
     def end_point(self) -> str:
-        if self._end_point is None:
+        if self.__end_point is None:
             self.logger.exception(f'API end point is not set. Terminating test execution...')
             return ''
-        return self._end_point
+        return self.__end_point
 
     @end_point.setter
     @allure.step("Set api end point as {1}")
-    def end_point(self, value):
-        self._end_point = value
+    def end_point(self, value: str):
+        self.__end_point = value
 
     @property
     @allure.step('Get API request data')
     def request_data(self) -> str:
-        return self._request_data
+        return self.__request_data
 
     @request_data.setter
     @allure.step('Set API request data as {1}')
-    def request_data(self, value):
+    def request_data(self, value: str):
         req_data_json_format = json.dumps(value)
-        self._request_data = req_data_json_format
+        self.__request_data = req_data_json_format
 
     @property
     @allure.step('Get API request parameters')
     def request_param(self) -> str:
-        return self._request_param
+        return self.__request_param
 
     @request_param.setter
     @allure.step('Set API request parameters as {1}')
-    def request_param(self, value):
-        self._request_param = value
+    def request_param(self, value: str):
+        self.__request_param = value
 
     def validate_end_point(self) -> str:
-        if self._end_point is None:
+        if self.__end_point is None:
             request_url = self.base_url
         else:
             request_url = self.base_url + self.end_point
@@ -95,25 +95,25 @@ class RestClient:
             self.logger.info(f"Initializing {request_type} rest call from {request_url}")
             match request_type.upper():
                 case 'GET':
-                    response: Response = self._https_session.get(request_url, params=self._request_param,
-                                                                 headers=self._https_session.headers,
-                                                                 data=self._request_data, verify=True)
+                    response: Response = self.__https_session.get(request_url, params=self.__request_param,
+                                                                  headers=self.__https_session.headers,
+                                                                  data=self.__request_data, verify=True)
                 case 'POST':
-                    response: Response = self._https_session.post(request_url, params=self._request_param,
-                                                                  headers=self._https_session.headers,
-                                                                  data=self._request_data, verify=True)
+                    response: Response = self.__https_session.post(request_url, params=self.__request_param,
+                                                                   headers=self.__https_session.headers,
+                                                                   data=self.__request_data, verify=True)
                 case 'PUT':
-                    response: Response = self._https_session.put(request_url, params=self._request_param,
-                                                                 headers=self._https_session.headers,
-                                                                 data=self._request_data, verify=True)
+                    response: Response = self.__https_session.put(request_url, params=self.__request_param,
+                                                                  headers=self.__https_session.headers,
+                                                                  data=self.__request_data, verify=True)
                 case 'PATCH':
-                    response: Response = self._https_session.patch(request_url, params=self._request_param,
-                                                                   headers=self._https_session.headers,
-                                                                   data=self._request_data, verify=True)
+                    response: Response = self.__https_session.patch(request_url, params=self.__request_param,
+                                                                    headers=self.__https_session.headers,
+                                                                    data=self.__request_data, verify=True)
                 case 'DELETE':
-                    response: Response = self._https_session.delete(request_url, params=self._request_param,
-                                                                    headers=self._https_session.headers,
-                                                                    data=self._request_data, verify=True)
+                    response: Response = self.__https_session.delete(request_url, params=self.__request_param,
+                                                                     headers=self.__https_session.headers,
+                                                                     data=self.__request_data, verify=True)
                 case _:
                     self.logger.info(f"Invalid request type : {request_type}")
 

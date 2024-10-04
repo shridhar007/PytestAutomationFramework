@@ -1,12 +1,12 @@
 import platform
 from pathlib import Path
+
 import pytest
-from playwright.async_api import async_playwright
+from _pytest.fixtures import SubRequest
+from playwright.sync_api import sync_playwright, BrowserContext, Browser, Page
 
 from common.framework_functions import CommonFunctions
 from common.logger import log_generator
-from _pytest.fixtures import SubRequest
-
 from common.user_asserts import UserAsserts
 
 
@@ -27,7 +27,7 @@ def api_setup_teardown(request: SubRequest):
     yield env_under_test, CommonFunctions.exec_config[f'{env_under_test} ENV'], user_asserts, logger
 
     # Clean up code here.
-    allure_dir = root_dir.joinpath('logs', 'allure-results')
+    allure_dir = root_dir.joinpath('allure-results')
     # command: str = f'allure generate --clean --single-file "{allure_dir}"'
     # logger.info(f'Allure single file generation command : {command}')
 
@@ -55,23 +55,16 @@ def api_setup_teardown(request: SubRequest):
         logger.info("Allure Report: Environment file do not exists")
 
 
-# @pytest.fixture(scope='class', autouse=True)
-# def setup_playwright_context():
-#     logger = log_generator("UI")
-#     pass
-
-@pytest.fixture(scope="session", autouse=True)
-async def playwright_context():
-    # Setup: Initialize Playwright
-    logger = log_generator("UI")
-    async with async_playwright() as playwright:
-        # Launch the browser (e.g., Chromium, Firefox, or Webkit)
-        browser = await playwright.chromium.launch(headless=False)  # Set headless=True for headless mode
-        # Create a new browser context
-        context = await browser.new_context()
-        # Provide the browser context to the test
-        yield context
-
-        # Teardown: Close the browser
-        await context.close()
-        await browser.close()
+@pytest.fixture(scope="class", autouse=True)
+def playwright_page() -> Page:
+    # Setup: Initialize Playwright Page
+    root_dir: Path = CommonFunctions.get_project_root_path()
+    logger = log_generator("UI", root_dir)
+    with sync_playwright() as playwright:
+        browser: Browser = playwright.chromium.launch(headless=False)
+        current_context: BrowserContext = browser.new_context()
+        page = current_context.new_page()
+        yield page
+        page.close()
+        current_context.close()
+        browser.close()

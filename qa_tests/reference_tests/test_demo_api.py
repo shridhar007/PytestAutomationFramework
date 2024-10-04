@@ -2,12 +2,11 @@ import inspect
 import json
 
 import allure
-from cryptography.fernet import Fernet
 from requests import Response
 
+from common.framework_functions import CommonFunctions
 from common.rest_client import RestClient
 from conf.conftest import api_setup_teardown
-from common.framework_functions import CommonFunctions
 
 
 @allure.feature("API Automation")
@@ -24,7 +23,7 @@ class TestDemoAPIs():
 
         logger.info(f"Test under execution : {test_case_name}")
         base_url = config_data['base_url']
-        decrypted_text = CommonFunctions.decrypt_key(encoded_str=config_data['msg'], key=config_data['decoder'])
+        decrypted_text = CommonFunctions.decrypt_key(encoded_str=config_data['encrypted_header'], key=config_data['decoder'])
 
         # Initialize headers. Can be moved to separate file later.
         headers = {
@@ -55,7 +54,7 @@ class TestDemoAPIs():
 
         logger.info(f"Test under execution : {test_case_name}")
         base_url = config_data['base_url']
-        decrypted_text = CommonFunctions.decrypt_key(encoded_str=config_data['msg'], key=config_data['decoder'])
+        decrypted_text = CommonFunctions.decrypt_key(encoded_str=config_data['encrypted_header'], key=config_data['decoder'])
 
         # Initialize headers. Can be moved to separate file later.
         headers = {
@@ -114,7 +113,7 @@ class TestDemoAPIs():
         logger.info(f"Test under execution : {test_case_name}")
         base_url = config_data['base_url']
 
-        decrypted_text = CommonFunctions.decrypt_key(encoded_str=config_data['msg'], key=config_data['decoder'])
+        decrypted_text = CommonFunctions.decrypt_key(encoded_str=config_data['encrypted_header'], key=config_data['decoder'])
 
         # create new workspace
         # Initialize headers. Can be moved to separate file later.
@@ -197,7 +196,8 @@ class TestDemoAPIs():
     @allure.title("Test case to perform delete operation")
     @allure.severity(allure.severity_level.NORMAL)
     def test_005(self, api_setup_teardown):
-        WORKSPACE_NAME_TO_BE_DELETED = 'created_from_python_framework'
+        # WORKSPACE_NAME_TO_BE_DELETED = 'created_from_python_framework'
+        WORKSPACE_NAME_TO_BE_DELETED = 'new_name'
 
         env_under_test, config_data, user_asserts, logger = api_setup_teardown
         test_case_name = inspect.currentframe().f_code.co_name
@@ -205,7 +205,7 @@ class TestDemoAPIs():
         logger.info(f"Test under execution : {test_case_name}")
         base_url = config_data['base_url']
 
-        decrypted_text = CommonFunctions.decrypt_key(encoded_str=config_data['msg'], key=config_data['decoder'])
+        decrypted_text = CommonFunctions.decrypt_key(encoded_str=config_data['encrypted_header'], key=config_data['decoder'])
 
         # Initialize headers. Can be moved to separate file later.
         headers = {
