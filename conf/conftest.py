@@ -61,7 +61,7 @@ def playwright_page() -> Page:
     root_dir: Path = CommonFunctions.get_project_root_path()
     logger = log_generator("UI", root_dir)
     with sync_playwright() as playwright:
-        browser: Browser = playwright.chromium.launch(headless=False)
+        browser: Browser = playwright.chromium.launch(headless=True)
         current_context: BrowserContext = browser.new_context()
         page = current_context.new_page()
         yield page
