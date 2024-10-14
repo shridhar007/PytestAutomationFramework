@@ -1,5 +1,0 @@
-"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
-"passed","Thu Oct 03 09:59:09 GMT 2024","Thu Oct 03 09:59:09 GMT 2024","377","Postman Workspace Automation","Sanity Test Cases","Postman Workspace APIs","","","Test case to perform GET operation using Postman APIs",""
-"passed","Thu Oct 03 09:59:10 GMT 2024","Thu Oct 03 09:59:11 GMT 2024","536","Postman Workspace Automation","Sanity Test Cases","Postman Workspace APIs","","","Test case to perform delete operation",""
-"passed","Thu Oct 03 09:59:09 GMT 2024","Thu Oct 03 09:59:10 GMT 2024","464","Postman Workspace Automation","Sanity Test Cases","Postman Workspace APIs","","","Test case to perform POST operation using Postman APIs",""
-"passed","Thu Oct 03 09:59:10 GMT 2024","Thu Oct 03 09:59:10 GMT 2024","675","Postman Workspace Automation","Sanity Test Cases","Postman Workspace APIs","","","Test case to perform PUT operation using Postman APIs",""

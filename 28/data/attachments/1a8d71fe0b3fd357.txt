@@ -1,8 +1,0 @@
-INFO     common.logger:conftest.py:23 Starting test setup process...
-INFO     common.logger:conftest.py:24 API tests are configured for QA environment
-INFO     common.logger:conftest.py:25 BaseURL : https://api.postman.com
-INFO     common.logger:test_demo_api.py:24 Test under execution : test_002
-INFO     common.logger:rest_client.py:95 Initializing GET rest call from https://api.postman.com/workspaces?
-ERROR    common.logger:rest_client.py:123 GET Request failed....!!!
-INFO     common.logger:rest_client.py:146 Response JSON : {"error":{"name":"AuthenticationError","message":"Invalid API Key. Every request requires a valid API Key to be sent."}}
-ERROR    common.logger:rest_client.py:124 Response Error Message: {'error': {'name': 'AuthenticationError', 'message': 'Invalid API Key. Every request requires a valid API Key to be sent.'}}

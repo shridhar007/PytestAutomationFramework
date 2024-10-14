@@ -1,9 +1,0 @@
-INFO     common.logger:test_demo_api.py:55 Test under execution : test_003
-INFO     common.logger:rest_client.py:95 Initializing POST rest call from https://api.postman.com/workspaces?
-INFO     common.logger:rest_client.py:121 POST request is Successful.....
-INFO     common.logger:test_demo_api.py:89 Workspace name : created_from_python_framework
-INFO     common.logger:test_demo_api.py:90 Workspace id : 50f7fffd-6714-401b-b02b-d556a45c4f94
-INFO     common.logger:user_asserts.py:13 Actual and expected should match
-INFO     common.logger:user_asserts.py:14 Expected value - 200 : Actual value - 200
-INFO     common.logger:user_asserts.py:13 None
-INFO     common.logger:user_asserts.py:14 Expected value - created_from_python_framework : Actual value - created_from_python_framework
