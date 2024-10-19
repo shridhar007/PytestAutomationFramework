@@ -1,0 +1,6 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"failed","Sat Oct 19 06:24:53 GMT 2024","Sat Oct 19 06:24:53 GMT 2024","58","Postman Workspace Automation","Sanity Test Cases","Postman Workspace APIs","","","Test case to perform PUT operation using Postman APIs",""
+"passed","Sat Oct 19 06:24:53 GMT 2024","Sat Oct 19 06:24:54 GMT 2024","709","Google Homepage Automation","Sanity Test Cases","UI Automation","","","Test case to perform GET operation using Postman APIs",""
+"failed","Sat Oct 19 06:24:53 GMT 2024","Sat Oct 19 06:24:53 GMT 2024","78","Postman Workspace Automation","Sanity Test Cases","Postman Workspace APIs","","","Test case to perform delete operation",""
+"failed","Sat Oct 19 06:24:53 GMT 2024","Sat Oct 19 06:24:53 GMT 2024","122","Postman Workspace Automation","Sanity Test Cases","Postman Workspace APIs","","","Test case to perform GET operation using Postman APIs",""
+"failed","Sat Oct 19 06:24:53 GMT 2024","Sat Oct 19 06:24:53 GMT 2024","57","Postman Workspace Automation","Sanity Test Cases","Postman Workspace APIs","","","Test case to perform POST operation using Postman APIs",""
